@@ -1,0 +1,14 @@
+cd /data/
+mkdir ruan
+mount -t nfs -o nolock 192.168.124.180:/home/gs/Ruan/ /data/ruan/
+export AST_BASE=/app/asterisk
+export PATH=$PATH:$AST_BASE/sbin:$AST_BASE/bin
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$AST_BASE/lib:$AST_BASE/lib/sasls:$AST_BASE/lib/dbd:$AST_BASE/lib/avahi:$AST_BASE/lib/sasl2
+export FORCE_AMPORTAL_CONF=${AST_BASE}/etc/amportal.conf
+export FREEPBX_CONF=${AST_BASE}/etc/freepbx.conf
+export WEB_ROOT=${AST_BASE}/var/lib/asterisk/static-http
+export ZEROCONFIG_PATH=${WEB_ROOT}/zeroconfig
+export DBUS_SESSION_BUS_ADDRESS=unix:path=/tmp/gs_voip_bus
+
+source  ${AST_BASE}/python2.7/setup_python_env.sh
+telnetd -l /bin/sh
